@@ -128,11 +128,7 @@ Puppet::Type.type(:mongodb_user).provide(:mongodb, parent: Puppet::Provider::Mon
 
   def self.from_roles(roles, db)
     roles.map do |entry|
-      if entry['db'].empty? || entry['db'] == db
-        entry['role']
-      else
-        "#{entry['role']}@#{entry['db']}"
-      end
+      "#{entry['role']}@#{entry['db']}"
     end.sort
   end
 

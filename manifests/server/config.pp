@@ -125,10 +125,6 @@ class mongodb::server::config {
       mode     => '0750',
       owner    => $user,
       group    => $group,
-      selrange => 's0',
-      selrole  => 'object_r',
-      seltype  => 'mongod_var_lib_t',
-      seluser  => 'system_u',
       require  => File[$config],
     }
 
@@ -163,7 +159,7 @@ class mongodb::server::config {
   }
 
   if $handle_creds {
-    if $auth and $store_creds {
+    if $store_creds {
       file { $rcfile:
         ensure  => present,
         content => template('mongodb/mongorc.js.erb'),
